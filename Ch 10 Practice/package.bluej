@@ -2,12 +2,12 @@
 dependency1.from=BabyNames
 dependency1.to=RecordReader
 dependency1.type=UsesDependency
-objectbench.height=76
+objectbench.height=100
 objectbench.width=658
 package.editor.height=400
-package.editor.width=560
-package.editor.x=972
-package.editor.y=311
+package.editor.width=865
+package.editor.x=483
+package.editor.y=306
 package.numDependencies=1
 package.numTargets=4
 package.showExtends=true
