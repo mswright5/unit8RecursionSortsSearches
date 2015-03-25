@@ -33,10 +33,9 @@ public class TreePanel extends JPanel
     {
         int x2 = x1 - (int)(Math.sin(Math.toRadians(angleDegree))*order*10);
         int y2 = y1 - (int)(Math.cos(Math.toRadians(angleDegree))*order*10);
-        System.out.println(x2 +" "+ y2);
         if (order == 1)
             page.drawLine (x1, y1, x2, y2);
-        else
+       else
         {
             page.drawLine (x1, y1, x2, y2);
             drawFractal(order-1, x2, y2, angleDegree + ANGLE, page);

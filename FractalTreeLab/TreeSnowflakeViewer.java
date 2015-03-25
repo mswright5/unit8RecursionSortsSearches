@@ -14,7 +14,7 @@ public class TreeSnowflakeViewer implements ActionListener
     private final int WIDTH = 900;
     private final int HEIGHT = 900;
 
-    private final int MIN = 1, MAX = 20;
+    private final int MIN = 1, MAX = 15;
 
     private JButton increase, decrease;
     private JLabel titleLabel, orderLabel;
