@@ -6,10 +6,9 @@ public class TreePanel extends JPanel
     private final int PANEL_WIDTH = 800;
     private final int PANEL_HEIGHT = 800;
 
-    private final int TOPX = 400, TOPY = 600;
-    private final int BOTTOMX = 400, BOTTOMY = 750;
+    private final int BOTTOMX = 600, BOTTOMY = 600;
 
-    private final int ANGLE = 15;
+    private final int ANGLE = 30;
 
     private int current; //current order
 
@@ -29,23 +28,19 @@ public class TreePanel extends JPanel
     //  intermediate points are computed, and each line segment is
     //  drawn as a fractal.
     //-----------------------------------------------------------------
-    public void drawFractal (int order, int x1, int y1, int x2, int y2, int angleDegree,
+    public void drawFractal (int order, int x1, int y1, int angleDegree,
     Graphics page)
     {
-        int x3, y3, x4;
-
+        int x2 = x1 - (int)(Math.sin(Math.toRadians(angleDegree))*order*10);
+        int y2 = y1 - (int)(Math.cos(Math.toRadians(angleDegree))*order*10);
+        System.out.println(x2 +" "+ y2);
         if (order == 1)
             page.drawLine (x1, y1, x2, y2);
         else
         {
-            x3 = x2 - (int)(x2*Math.sin(Math.toRadians(ANGLE)));
-            x4 = x2 + (int)(x2*Math.sin(Math.toRadians(ANGLE)));
-
-            y3 = y2-(y2/8);
-
-            drawFractal(order-1, x1, y1, x2, y2, angleDegree + ANGLE, page);
-            drawFractal(order-1, x2, y2, x3, y3, angleDegree + ANGLE, page);
-            drawFractal(order-1, x2, y2, x4, y3, angleDegree + ANGLE, page);
+            page.drawLine (x1, y1, x2, y2);
+            drawFractal(order-1, x2, y2, angleDegree + ANGLE, page);
+            drawFractal(order-1, x2, y2, angleDegree - ANGLE, page);
         }
     }
 
@@ -58,8 +53,7 @@ public class TreePanel extends JPanel
 
         page.setColor (Color.GREEN);
 
-        drawFractal (current, BOTTOMX, BOTTOMY, TOPX, TOPY, ANGLE, page);
-        //drawFractal (current, BOTTOMX, BOTTOMY, RIGHTX, RIGHTY, ANGLE, page);
+        drawFractal (current, BOTTOMX, BOTTOMY, ANGLE, page);
     }
 
     //-----------------------------------------------------------------
