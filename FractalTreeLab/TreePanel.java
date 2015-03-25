@@ -3,14 +3,13 @@ import javax.swing.JPanel;
 
 public class TreePanel extends JPanel
 {
-    private final int PANEL_WIDTH = 600;
-    private final int PANEL_HEIGHT = 600;
+    private final int PANEL_WIDTH = 800;
+    private final int PANEL_HEIGHT = 800;
 
-    private final int TOPX = 200, TOPY = 20;
-    private final int LEFTX = 60, LEFTY = 300;
-    private final int RIGHTX = 340, RIGHTY = 300;
+    private final int TOPX = 400, TOPY = 600;
+    private final int BOTTOMX = 400, BOTTOMY = 750;
 
-    private final int ANGLE = 30;
+    private final int ANGLE = 15;
 
     private int current; //current order
 
@@ -30,19 +29,23 @@ public class TreePanel extends JPanel
     //  intermediate points are computed, and each line segment is
     //  drawn as a fractal.
     //-----------------------------------------------------------------
-    public void drawFractal (int order, int x1, int y1, int x3, int y3,
+    public void drawFractal (int order, int x1, int y1, int x2, int y2, int angleDegree,
     Graphics page)
     {
-        int deltaX, deltaY, x2, y2;
+        int x3, y3, x4;
 
         if (order == 1)
-            page.drawLine (x1, y1, x3, y3);
+            page.drawLine (x1, y1, x2, y2);
         else
         {
-            x2 = int(Math.
+            x3 = x2 - (int)(x2*Math.sin(Math.toRadians(ANGLE)));
+            x4 = x2 + (int)(x2*Math.sin(Math.toRadians(ANGLE)));
 
-            drawFractal (order-1, x1, y1, x2, y2, page);
-            drawFractal (order-1, x2, y2, x3, y3, page);
+            y3 = y2-(y2/8);
+
+            drawFractal(order-1, x1, y1, x2, y2, angleDegree + ANGLE, page);
+            drawFractal(order-1, x2, y2, x3, y3, angleDegree + ANGLE, page);
+            drawFractal(order-1, x2, y2, x4, y3, angleDegree + ANGLE, page);
         }
     }
 
@@ -53,11 +56,10 @@ public class TreePanel extends JPanel
     {
         super.paintComponent (page);
 
-        page.setColor (Color.green);
+        page.setColor (Color.GREEN);
 
-        drawFractal (current, TOPX, TOPY, LEFTX, LEFTY, page);
-        drawFractal (current, LEFTX, LEFTY, RIGHTX, RIGHTY, page);
-        drawFractal (current, RIGHTX, RIGHTY, TOPX, TOPY, page);
+        drawFractal (current, BOTTOMX, BOTTOMY, TOPX, TOPY, ANGLE, page);
+        //drawFractal (current, BOTTOMX, BOTTOMY, RIGHTX, RIGHTY, ANGLE, page);
     }
 
     //-----------------------------------------------------------------
