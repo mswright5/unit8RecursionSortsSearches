@@ -9,12 +9,12 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-public class TreeSnowflakeViewer implements ActionListener
+public class TreeViewer implements ActionListener
 {
-    private final int WIDTH = 900;
-    private final int HEIGHT = 900;
+    private final int WIDTH = 1000;
+    private final int HEIGHT = 800;
 
-    private final int MIN = 1, MAX = 15;
+    private final int MIN = 1, MAX = 18;
 
     private JButton increase, decrease;
     private JLabel titleLabel, orderLabel;
@@ -27,10 +27,10 @@ public class TreeSnowflakeViewer implements ActionListener
     //-----------------------------------------------------------------
     public static void main(String[] args)
     {
-        TreeSnowflakeViewer viewer = new TreeSnowflakeViewer();
+        TreeViewer viewer = new TreeViewer();
     }
 
-    public TreeSnowflakeViewer()
+    public TreeViewer()
     {
         tools = new JPanel ();
         tools.setLayout (new BoxLayout(tools, BoxLayout.X_AXIS));

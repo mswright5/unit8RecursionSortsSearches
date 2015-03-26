@@ -1,12 +1,14 @@
 import java.awt.*;
 import javax.swing.JPanel;
+import java.awt.geom.Line2D;
+import javax.swing.*;
 
 public class TreePanel extends JPanel
 {
-    private final int PANEL_WIDTH = 800;
-    private final int PANEL_HEIGHT = 800;
+    private final int PANEL_WIDTH = (int) Toolkit.getDefaultToolkit().getScreenSize().getWidth() - 200;
+    private final int PANEL_HEIGHT = (int) Toolkit.getDefaultToolkit().getScreenSize().getHeight() - 200;
 
-    private final int BOTTOMX = 600, BOTTOMY = 600;
+    private final int BOTTOMX = PANEL_WIDTH / 2, BOTTOMY = PANEL_HEIGHT/2;
 
     private final int ANGLE = 30;
 
@@ -33,9 +35,12 @@ public class TreePanel extends JPanel
     {
         int x2 = x1 - (int)(Math.sin(Math.toRadians(angleDegree))*order*10);
         int y2 = y1 - (int)(Math.cos(Math.toRadians(angleDegree))*order*10);
+
+        Graphics2D page2 = (Graphics2D) page;
+        page2.setStroke(new BasicStroke(order));
         if (order == 1)
             page.drawLine (x1, y1, x2, y2);
-       else
+        else
         {
             page.drawLine (x1, y1, x2, y2);
             drawFractal(order-1, x2, y2, angleDegree + ANGLE, page);
@@ -50,9 +55,17 @@ public class TreePanel extends JPanel
     {
         super.paintComponent (page);
 
-        page.setColor (Color.GREEN);
+        page.setColor (Color.RED);
+        drawFractal (current, BOTTOMX, BOTTOMY, 0, page);
 
-        drawFractal (current, BOTTOMX, BOTTOMY, ANGLE, page);
+        page.setColor (Color.BLUE);
+        drawFractal (current, BOTTOMX, BOTTOMY, 90, page);
+
+        page.setColor (Color.GREEN);
+        drawFractal (current, BOTTOMX, BOTTOMY, 180, page);
+
+        page.setColor (Color.YELLOW);
+        drawFractal (current, BOTTOMX, BOTTOMY, 270, page);
     }
 
     //-----------------------------------------------------------------
